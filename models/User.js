@@ -35,15 +35,15 @@ const userSchema = Schema({
 });
 
 userSchema.pre('save', function(next){
-    var {password} = this;
+    var user = this;
     //비밀번호를 암호화 시킨다
     this.isModified('password')?
         bcrypt.genSalt(saltRounds, function(err, salt) {
             if(err) return next(err);
-            bcrypt.hash(password, salt, function(err, hash) {
+            bcrypt.hash(user.password, salt, function(err, hash) {
                 // Store hash in your password DB.
                 if(err) return next(err);
-                password = hash;
+                user.password = hash;
                 next();
             });
         })
@@ -52,6 +52,7 @@ userSchema.pre('save', function(next){
 
 userSchema.methods.comparePassword = function(plainPassword, callback){
     bcrypt.compare(plainPassword, this.password, function(err, isMatch){
+        console.log(plainPassword, this.password, isMatch);
         return err? callback(err, false) : callback(false, isMatch);
     });
 }
