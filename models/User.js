@@ -50,6 +50,12 @@ userSchema.pre('save', function(next){
     : next();
 });
 
+userSchema.methods.comparePassword = function(plainPassword, callback){
+    bcrypt.compare(plainPassword, this.password, function(err, isMatch){
+        return err? callback(err, false) : callback(false, isMatch);
+    });
+}
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = {User}; //모델을 다른곳에 쓸수있도록 export
