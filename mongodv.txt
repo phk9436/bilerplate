@@ -1,0 +1,35 @@
+npm install body-parser --save (server)
+postman
+
+npm install nodemon --save-dev (개발중에만 사용, 소스 바뀔때 자동 리프레시) (server)
+"backend": "nodemon index.js"
+
+dev.js, key.js, prod.js, git ignore(url 보안)
+
+npm install bcrypt --save (비밀번호 보안) (server)
+bycript 초기코드 가져오기
+
+npm install jsonwebtoken --save(토큰생성) (server)
+
+npm install cookie-parser --save(쿠키생성) (server)
+
+cd (폴더 이동)
+
+npx create-react-app 폴더명(.은 해당 디렉토리 안에다가 설치하겠다) (client)
+소스는 public이 아니라 src에 넣어야 함(webpack관리)
+
+es7 확장/ rfce(자동완성) / rcc(class)
+
+npm install react-router-dom --save(리액트 라우터) (client)
+
+npm install axios --save (데이터 리퀘스트) (client)
+
+npm install http-proxy-middleware --save(proxy) (server), (client)
+
+npm install concurrently --save (동시 두개 가동) (global)
+"scripts": {
+    "dev": "concurrently \"npm run backend --prefix server\" \"npm run start --prefix client\""
+  }
+
+https://ant.design/ (디자인시스템)
+npm install antd --save (client)
