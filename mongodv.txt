@@ -39,3 +39,6 @@ npm install redux react-redux redux-promise redux-thunk --save (리덕스 디펜
 
 redux devtools(크롬확장프로그램)
 combineReducers - 수많은 reducer들을 하나의 rootReducer로 합침
+
+원래 함수형 리액트에선 쓸 수 없었던 기능들을 react hooks로 사용가능해짐
+componentDidMount = useEffect, []를 뒤에 붙이지 않으면 계속 렌더링
