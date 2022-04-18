@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "antd": "^4.19.5",
-    "concurrently": "^7.1.0"
+    "concurrently": "^7.1.0",
+    "react-router-dom": "^5.2.0"
   },
   "scripts": {
     "dev": "concurrently \"npm run backend --prefix server\" \"npm run start --prefix client\""

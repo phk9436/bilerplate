@@ -20,7 +20,7 @@ npx create-react-app 폴더명(.은 해당 디렉토리 안에다가 설치하�
 
 es7 확장/ rfce(자동완성) / rcc(class)
 
-npm install react-router-dom --save(리액트 라우터) (client)
+npm install react-router-dom@5.2.0 --save(리액트 라우터) (client)
 
 npm install axios --save (데이터 리퀘스트) (client)
 
@@ -33,3 +33,9 @@ npm install concurrently --save (동시 두개 가동) (global)
 
 https://ant.design/ (디자인시스템)
 npm install antd --save (client)
+
+npm install redux react-redux redux-promise redux-thunk --save (리덕스 디펜던시)
+리덕스 store는 객체형식만 받음 - promise, function을 받기 위해 redux-promise redux-thunk를 받는다.
+
+redux devtools(크롬확장프로그램)
+combineReducers - 수많은 reducer들을 하나의 rootReducer로 합침
