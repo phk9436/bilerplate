@@ -20,7 +20,7 @@ function LoginPage(props) {
         let body = {Email, Password};
         dispatch(loginUser(body))
         .then(response => {
-            response.payload.loginSuccess?
+            response.payload.success?
             (props.history.push('/')):
             alert('error');
         });
