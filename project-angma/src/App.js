@@ -10,9 +10,9 @@ function App() {
   }
   return (
     <div className="App">
-      <Hello/>
-      <Hello/>
-      <Hello/>
+      <Hello age={10}/>
+      <Hello age={20}/>
+      <Hello age={30}/>
       {/*<div className={styles.box}></div>*/}
     </div>
   );

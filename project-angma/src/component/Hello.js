@@ -1,20 +1,13 @@
 import { useState } from "react";
+import UserName from "./UserName";
 
-
-export default function Hello(){
-    const [Name, setName] = useState("Mike")
+export default function Hello(props){
+    const [Name, setName] = useState("Mike");
+    const [Age, setAge] = useState(props.age);
+    const msg = Age > 19 ? '성인' : '미성년자';
     function changeName(){
         setName(Name === "Mike"? "Jane": "Mike");
-    }
-
-    function showName(){
-        console.log(Name)
-    }
-    function showAge(age){
-        console.log(age)
-    }
-    function showVal(e){
-        console.log(e.target.value)
+        setAge(Name === "Mike"? Age + 10 : Math.floor(Age / 2));
     }
 
     return (
@@ -23,7 +16,8 @@ export default function Hello(){
         <button onClick={showName}>Show Name</button>
         <button onClick={()=>showAge(10)}>Show age</button>
         <input type="text" onChange={showVal}/>*/}
-        <h2>{Name}</h2>
+        <h2>{Name}({Age}) : {msg}</h2>
+        <UserName name = {Name}></UserName>
         <button onClick={changeName}>Change</button>
     </div>
     )
