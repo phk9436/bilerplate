@@ -1,15 +1,16 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 function Header() {
   return (
     <div className='Header'>
         <h1>
-            <a href="/">토익 영단어(고급)</a>
+            <Link to="/">토익 영단어(고급)</Link>
         </h1>
-        <div className="menu">
+        {/*<div className="menu">
             <a href="" className="link">단어 추가</a>
             <a href="" className="link">Day 추가</a>
-        </div>
+            </div>*/}
     </div>
   )
 }
