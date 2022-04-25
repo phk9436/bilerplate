@@ -24,3 +24,5 @@ function App() {
 }
 
 export default App;
+
+//json-server --watch ./src/db/data.json --port 3001
