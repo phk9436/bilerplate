@@ -1,34 +1,41 @@
-import React, {useRef} from 'react'
+import React, {useRef, useState} from 'react'
 import useFetch from '../hooks/useFetch'
 import {useHistory} from 'react-router-dom';
 
 function CreateWord() {
     const days = useFetch('http://localhost:3001/days');
     const history = useHistory();
+    const [isLoading, setisLoading] = useState(false)
     function onsubmit(e){
         e.preventDefault();
-        fetch('http://localhost:3001/words/', {
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json' //보내는 리소스의 타입
-            },
-            body: JSON.stringify({
-                day : Number(dayRef.current.value),
-                eng : engRef.current.value,
-                kor : korRef.current.value,
-                isDone : false
+
+        if(!isLoading){
+            setisLoading(true);
+            fetch('http://localhost:3001/words/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json' //보내는 리소스의 타입
+                },
+                body: JSON.stringify({
+                    day : Number(dayRef.current.value),
+                    eng : engRef.current.value,
+                    kor : korRef.current.value,
+                    isDone : false
+                })
+            }).then(res => {
+                if(res.ok){
+                    alert('생성완료');
+                    history.push(`/day/${dayRef.current.value}`);
+                    setisLoading(false);
+                }
             })
-        }).then(res => {
-            if(res.ok){
-                alert('생성완료');
-                history.push(`/day/${dayRef.current.value}`)
-            }
-        })
+            
+        }
     }
 
-    const engRef = useRef(null)
-    const korRef = useRef(null)
-    const dayRef = useRef(null)
+    const engRef = useRef(null);
+    const korRef = useRef(null);
+    const dayRef = useRef(null);
 
     return (
         <form action="" onSubmit={onsubmit}>
@@ -50,7 +57,9 @@ function CreateWord() {
                     })}
                 </select>
             </div>
-            <button>저장</button>
+            <button
+                style={{opacity: isLoading ? 0.3 : 1}}
+            >{isLoading?"Saving...":'저장'}</button>
         </form>
     )
 }
