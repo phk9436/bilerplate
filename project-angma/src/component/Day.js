@@ -1,22 +1,12 @@
-import React, {useState, useEffect} from 'react'
-//import dummy from "../db/data.json";
+import React from 'react'
 import {useParams} from "react-router-dom";
 import Word from './Word';
+import useFetch from '../hooks/useFetch';
 
 function Day() {
     const {day} = useParams();
-    //const wordList = dummy.words.filter(words => words.day === Number(day))
-    const [words, setwords] = useState([]);
+    const words = useFetch(`http://localhost:3001/words?day=${day}`)
 
-    useEffect(()=>{
-        fetch(`http://localhost:3001/words?day=${day}`) //프로미스 반환
-        .then(res => { //http 형식으로 받은 정보를 json으로 반환
-            return res.json();
-        })
-        .then(data => { //json으로 받은 데이터를 useState로 세팅
-            setwords(data);
-        });
-    }, [day]) //day배열이 변경될때만 useEffect가 실행, 빈 배열일때는 최초 렌더링때만 한번
   return (
     <>
         <h2>Day {day}</h2>
