@@ -1,33 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function App () {
-  const [toDo, settoDo] = useState('');
-  const [toDoLi, settoDoLi] = useState([]);
-  const onChange = (e) => settoDo(e.target.value);
-  const onSubmit = (e) => {
-    e.preventDefault();
-    if (toDo === '') {
-      return false;
-    } else {
-      settoDo('');
-      settoDoLi((array) => [toDo, ...array]);
-    }
-  };
+  const [loading, setLoading] = useState(true);
+  const [coins, setCoins] = useState([]);
+  useEffect(() => {
+    fetch('https://api.coinpaprika.com/v1/tickers')
+      .then((res) => res.json()).then((data) => {
+        setCoins(data);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <div className="App">
-      <h1>My To Dos ({toDoLi.length})</h1>
+      <h1>The Coins! {loading ? '' : `(${coins.length})`}</h1>
+      {loading
+        ? <p>Loading...</p>
+        : null}
       <ul>
-        {toDoLi.map((e, i) => {
+        {coins.map((e) => {
           return (
-            <li key={i}>{e}</li>
+              <li key={e.id}>{e.name} ({e.symbol}) : ${e.quotes.USD.price}</li>
           );
         })}
       </ul>
-      <form action="" onSubmit={onSubmit}>
-        <input type="text" placeholder='Write to do' value={toDo} onChange={onChange}/>
-        <button>Add to do</button>
-      </form>
     </div>
   );
 }
