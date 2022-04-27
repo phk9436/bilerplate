@@ -1,37 +1,33 @@
-import styles from './App.module.css';
-import React, { useState, useEffect } from 'react';
-
-function Hello () {
-  useEffect(() => {
-    console.log('created');
-    return () => console.log('destryed');
-  }, []);
-  return <h1>Hello</h1>;
-}
+import React, { useState } from 'react';
 
 function App () {
-  const [Counter, setCounter] = useState(0);
-  const [keyword, setKeyword] = useState('');
-  const [showing, setshowing] = useState(false);
-
-  const onClick = () => setCounter(Counter + 1);
-  const onChange = (e) => setKeyword(e.target.value);
-  const onShow = () => setshowing(!showing);
-
-  useEffect(() => console.log('render'), []);
-  useEffect(() => { if (keyword !== '' && keyword.length > 5) console.log('Search API'); }, [keyword]);
-  useEffect(() => { if (Counter > 0) console.log('Counting'); }, [Counter]);
-  useEffect(() => { if (keyword !== '' || Counter > 0) console.log('both changing'); }, [keyword, Counter]);
+  const [toDo, settoDo] = useState('');
+  const [toDoLi, settoDoLi] = useState([]);
+  const onChange = (e) => settoDo(e.target.value);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (toDo === '') {
+      return false;
+    } else {
+      settoDo('');
+      settoDoLi((array) => [toDo, ...array]);
+    }
+  };
 
   return (
     <div className="App">
-      <h1 className={styles.title}>React</h1>
-      <p>{Counter} {keyword}</p>
-      <input type="text" placeholder="Search here" onChange={onChange} value={keyword}/>
-      <button onClick={onClick}>Counter</button>
-
-      <button onClick={onShow}>{showing ? 'Hide' : 'Show'}</button>
-      {showing ? <Hello/> : null}
+      <h1>My To Dos ({toDoLi.length})</h1>
+      <ul>
+        {toDoLi.map((e, i) => {
+          return (
+            <li key={i}>{e}</li>
+          );
+        })}
+      </ul>
+      <form action="" onSubmit={onSubmit}>
+        <input type="text" placeholder='Write to do' value={toDo} onChange={onChange}/>
+        <button>Add to do</button>
+      </form>
     </div>
   );
 }
