@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/bilerplate/project-nomad1/static/js/main.ce86a31f.js",
+    "index.html": "/bilerplate/project-nomad1/index.html",
+    "main.ce86a31f.js.map": "/bilerplate/project-nomad1/static/js/main.ce86a31f.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.ce86a31f.js"
+  ]
+}
