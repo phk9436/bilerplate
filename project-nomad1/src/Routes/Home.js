@@ -17,7 +17,7 @@ function Home () {
   return (
       <div>
         {loaded || <h1>Loading</h1>}
-        {loaded && <Movie movie={movie} loaded={loaded}></Movie>}
+        {loaded && <Movie movie={movie} id={movie.id}></Movie>}
       </div>
   );
 }
