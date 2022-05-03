@@ -45,7 +45,7 @@ function Auth() {
       const data = await signInWithPopup(getAuth(), provider);
       console.log(data);
     } catch(err) {
-      console.log(err);
+      setError(err.message);
     }
     
   }
