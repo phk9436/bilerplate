@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { async } from '@firebase/util';
 
 function Auth() {
   const [email, setEmail] = useState('');
@@ -51,7 +50,7 @@ function Auth() {
   }
 
   return (
-    <div>
+    <div style={{margin:'auto', width: 'fit-content'}}>
       <h1>{newAccount ? "회원가입" : "로그인"}</h1>
       <form action="" onSubmit={onSubmit}>
         <input type="text" placeholder='Email' required value={email} onChange={ChangeMail}/>
@@ -63,7 +62,7 @@ function Auth() {
         <button name="google" onClick={onSocialClick}>{newAccount ? 'SignUp' : 'Continue'} with Google</button>
       </div>
       <button onClick={toggleAccount}>{newAccount ? "로그인창으로" : "회원가입창으로"}</button>
-      {error && <p>{error}</p>}
+      {error && <p style={{color:'red'}}>{error}</p>}
     </div>
   )
 }

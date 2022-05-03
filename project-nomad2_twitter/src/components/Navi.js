@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import {getAuth} from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 
 function Navi() {
   const navigate = useNavigate();
