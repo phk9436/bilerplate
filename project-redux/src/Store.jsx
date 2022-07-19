@@ -17,14 +17,21 @@ export const deleteToDo = (id) => {
   };
 };
 
-const reducer = (state = [], action) => {
-  switch (action.type) {
-    case Add:
-      return [{ text: action.text, id: Date.now() }, ...state];
-    case Delete:
-      return state.filter((e) => e.id !== action.id);
-    default:
-      return state;
+JSON.parse(localStorage.getItem('todoList')) || localStorage.setItem('todoList', JSON.stringify([]));
+const localState = JSON.parse(localStorage.getItem('todoList'));
+
+
+const reducer = (state = localState, action) => {
+  if(action.type === Add) {
+    const stateArr = [{ text: action.text, id: Date.now() }, ...state];
+    localStorage.todoList = JSON.stringify(stateArr);
+    return stateArr;
+  } else if (action.type === Delete) {
+    const stateArr = state.filter((e) => e.id !== action.id)
+    localStorage.todoList = JSON.stringify(stateArr);
+    return stateArr;
+  } else {
+    return state;
   }
 };
 
