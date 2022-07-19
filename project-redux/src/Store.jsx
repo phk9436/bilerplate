@@ -1,40 +1,25 @@
-import { legacy_createStore as createStore } from "redux";
+import { createAction, createReducer, configureStore } from "@reduxjs/toolkit";
 
-const Add = "Add";
-const Delete = "Delete";
+export const addToDo = createAction("Add");
+export const deleteToDo = createAction("Delete");
 
-export const addToDo = (text) => {
-  return {
-    type: Add,
-    text,
-  };
-};
+JSON.parse(localStorage.getItem("todoList")) ||
+  localStorage.setItem("todoList", JSON.stringify([]));
+const localState = JSON.parse(localStorage.getItem("todoList"));
 
-export const deleteToDo = (id) => {
-  return {
-    type: Delete,
-    id
-  };
-};
-
-JSON.parse(localStorage.getItem('todoList')) || localStorage.setItem('todoList', JSON.stringify([]));
-const localState = JSON.parse(localStorage.getItem('todoList'));
-
-
-const reducer = (state = localState, action) => {
-  if(action.type === Add) {
-    const stateArr = [{ text: action.text, id: Date.now() }, ...state];
+const reducer = createReducer(localState, {
+  [addToDo]: (state, action) => {
+    const stateVal = { text: action.payload, id: Date.now() };
+    localStorage.todoList = JSON.stringify([stateVal, ...state]);
+    state.unshift(stateVal);
+  },
+  [deleteToDo]: (state, action) => {
+    const stateArr = state.filter((e) => e.id !== action.payload);
     localStorage.todoList = JSON.stringify(stateArr);
     return stateArr;
-  } else if (action.type === Delete) {
-    const stateArr = state.filter((e) => e.id !== action.id)
-    localStorage.todoList = JSON.stringify(stateArr);
-    return stateArr;
-  } else {
-    return state;
-  }
-};
+  },
+});
 
-const store = createStore(reducer);
+const store = configureStore({ reducer });
 
 export default store;
