@@ -1,12 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux/es/exports";
-import { deleteToDo } from "../Store";
+import { del } from "../Store";
 import { Link } from "react-router-dom";
 
 function Todos({ text, id }) {
   const dispatch = useDispatch();
   const delState = () => {
-    dispatch(deleteToDo(id));
+    dispatch(del(id))
   };
   return (
     <li>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux/es/exports";
-import { addToDo } from "../Store";
-import { useDispatch } from "react-redux/es/exports";
+import { useSelector, useDispatch } from "react-redux/es/exports";
+import { add } from "../Store";
 import Todos from "../components/Todos";
 
 function Home() {
@@ -15,7 +14,7 @@ function Home() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(addToDo(text));
+    dispatch(add(text));
     text && setText("");
   };
 
@@ -27,9 +26,8 @@ function Home() {
         <button>Add</button>
       </form>
       <ul>
-        {toDos.map((e) => (
-          <Todos text={e.text} id={e.id} key={e.id}/>
-        ))}
+        {toDos &&
+          toDos.map((e) => <Todos text={e.text} id={e.id} key={e.id} />)}
       </ul>
     </div>
   );
