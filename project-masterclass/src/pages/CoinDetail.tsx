@@ -5,7 +5,8 @@ import { Route, Routes, Link, useMatch } from "react-router-dom";
 import styled from "styled-components";
 import Price from "./Price";
 import Chart from "./Chart";
-import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
+import { useQuery } from "@tanstack/react-query";
+
 interface CoinState {
   state: { name: string; rank: number };
 }
@@ -66,15 +67,18 @@ interface PriceData {
 }
 
 function CoinDetail() {
-  const queryClient = new QueryClient();
-  console.log(queryClient)
   const { id } = useParams();
   const { state } = useLocation() as CoinState;
   const priceMatch = useMatch("/:id/price");
   const chartMatch = useMatch("/:id/chart");
 
-  useEffect(() => {}, []);
+  const getCoinInfo = async () =>
+    await axios.get(`https://api.coinpaprika.com/v1/coins/${id}`);
+  const getTickerInfo = async () =>
+    await axios.get(`https://api.coinpaprika.com/v1/tickers/${id}`);
 
+  const {} = useQuery(["CoinInfo"], getCoinInfo);
+  const {} = useQuery(["TickerInfo"], getTickerInfo);
   return (
     <Container>
       <Header>
