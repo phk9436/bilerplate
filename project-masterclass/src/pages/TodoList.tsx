@@ -40,7 +40,7 @@ function TodoList() {
           {...register("email", {
             required: "email required",
             pattern: {
-              value: /^[A-Za-z0-9._%+-]+@naver.com$/,
+              value: /^[A-Za-z0-9._%+-]+@naver\.com$/,
               message: "pattern not right",
             },
           })}
